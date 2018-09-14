@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
 			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
 			intent.putExtra("type", 4);
 			startActivity(intent);
+		}else if ("Mosaic".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+			intent.putExtra("type", 5);
+			startActivity(intent);
 		}
 
 	}

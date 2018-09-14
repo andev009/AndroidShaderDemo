@@ -9,7 +9,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
 import com.andev.androidshaderdemo.R;
+import com.andev.androidshaderdemo.render.BaseRender;
 import com.andev.androidshaderdemo.render.MultiTextureRender;
 import com.andev.androidshaderdemo.render.SimpleRender;
 import com.andev.androidshaderdemo.render.SimpleTextureRender;
@@ -63,8 +65,10 @@ public class FilterActivity extends AppCompatActivity {
 			setMultiTextureRender();
 		}else if(type == 3){
 			setTwoTextureRender();
-		}else{
+		}else if(type == 4){
 			setTwoFilterRender();
+		}else if(type == 5){
+			setMosaicRender();
 		}
 	}
 
@@ -91,6 +95,11 @@ public class FilterActivity extends AppCompatActivity {
 	private void setTwoFilterRender(){
 		TwoFilterRender twoFilterRender = new TwoFilterRender(this);
 		glSurfaceView.setRenderer(twoFilterRender);
+	}
+
+	private void setMosaicRender(){
+		BaseRender baseRender = new BaseRender(this, R.raw.simple_texture_vertex_shader, R.raw.mosaic_fragment_shader);
+		glSurfaceView.setRenderer(baseRender);
 	}
 
 	@Override

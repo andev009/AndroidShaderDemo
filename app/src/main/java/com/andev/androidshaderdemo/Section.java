@@ -13,6 +13,7 @@ public class Section {
 		sectionList.add("MultiTextureRender");
 		sectionList.add("TwoTextureRender");
 		sectionList.add("TwoFilterRender");
+		sectionList.add("Mosaic");
 	}
 
 	List<String> getSectionList(){
