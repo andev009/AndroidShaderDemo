@@ -1,0 +1,43 @@
+precision mediump float;
+uniform sampler2D u_TextureUnit0;//orgin
+uniform sampler2D u_TextureUnit1;//edge
+uniform sampler2D u_TextureUnit2;//hefemap
+uniform sampler2D u_TextureUnit3;//hefemetal
+uniform sampler2D u_TextureUnit4;//hefesoftlight
+uniform sampler2D u_TextureUnit5;//hefegradientmap
+varying vec2 v_TextureCoordinates;
+
+uniform float u_Strength;//
+
+void main()
+{
+     vec4 originColor = texture2D(u_TextureUnit0, v_TextureCoordinates);
+     vec3 texel = texture2D(u_TextureUnit0, v_TextureCoordinates).rgb;
+     vec3 edge = texture2D(u_TextureUnit1, v_TextureCoordinates).rgb;
+     vec3 metal = texture2D(u_TextureUnit3, v_TextureCoordinates).rgb;
+     vec3 hefemap = texture2D(u_TextureUnit2, v_TextureCoordinates).rgb;
+     texel = texel * edge;
+
+     //texel = vec3(dot(vec3(0.3, 0.6, 0.1), texel));
+     gl_FragColor = vec4(texel, 1.0f);
+
+
+//    vec3 luma = vec3(.30, .59, .11);
+//    vec3 gradSample = texture2D(u_TextureUnit5, vec2(dot(luma, texel), .5)).rgb;
+//    vec3 final = vec3(
+//                      texture2D(u_TextureUnit4, vec2(gradSample.r, texel.r)).r,
+//                      texture2D(u_TextureUnit4, vec2(gradSample.g, texel.g)).g,
+//                      texture2D(u_TextureUnit4, vec2(gradSample.b, texel.b)).b
+//                      );
+//
+//    vec3 metal = texture2D(u_TextureUnit3, v_TextureCoordinates).rgb;
+//    vec3 metaled = vec3(
+//                        texture2D(u_TextureUnit4, vec2(metal.r, texel.r)).r,
+//                        texture2D(u_TextureUnit4, vec2(metal.g, texel.g)).g,
+//                        texture2D(u_TextureUnit4, vec2(metal.b, texel.b)).b
+//                        );
+//
+//    metaled.rgb = mix(originColor.rgb, metaled.rgb, u_Strength);
+//
+//    gl_FragColor = vec4(metaled, 1.0f);
+}
