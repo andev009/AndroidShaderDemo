@@ -37,11 +37,7 @@ public class SharpRender implements GLSurfaceView.Renderer{
 	VertexArray vertexArray;
 	SharpShaderProgram sharpShaderProgram;
 	private int originTexture;
-	private int edgeTexture;
-	private int hefeMapTexture;
-	private int hefemetalTexture;
-	private int hefesoftlightTexture;
-	private int hefegradientmapTexture;
+
 	private int[] textureIDs;
 
 	private int width;
@@ -58,9 +54,8 @@ public class SharpRender implements GLSurfaceView.Renderer{
 
 		sharpShaderProgram = new SharpShaderProgram(context);
 		originTexture = TextureHelper.loadTexture(context, R.drawable.lena);
-		edgeTexture = TextureHelper.loadTexture(context, R.drawable.edgeburn);
 
-		textureIDs = new int[]{originTexture, edgeTexture};
+		textureIDs = new int[]{originTexture};
 	}
 
 	@Override
@@ -74,10 +69,6 @@ public class SharpRender implements GLSurfaceView.Renderer{
 	@Override
 	public void onDrawFrame(GL10 gl) {
 		glClear(GL_COLOR_BUFFER_BIT);
-
-//		Log.w("wf", width + "");
-//		Log.w("wf", 1.0f / width + "");
-//		Log.w("hf", 1.0f / height + "");
 
 		sharpShaderProgram.useProgram();
 		sharpShaderProgram.setUniforms(textureIDs, 1.0f / width, 1.0f / height);
