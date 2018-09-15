@@ -29,6 +29,7 @@ void main()
      mediump vec3 leftBottomTextureColor = texture2D(u_TextureUnit0, v_leftBottomTextureCoordinate).rgb;
      mediump vec3 rightBottomTextureColor = texture2D(u_TextureUnit0, v_rightBottomTextureCoordinate).rgb;
 
+      //求灰度值
      float leftl = dot(leftTextureColor.rgb, W);
      float rightl = dot(rightTextureColor.rgb, W);
      float topl = dot(topTextureColor.rgb, W);
@@ -51,6 +52,7 @@ void main()
                     leftTopl * -1.0 + rightTopl * -1.0 +
                     leftBottoml * 1.0 +rightBottoml * 1.0;
 
+     //求梯度
      float finalColor = length(vec2(hColor, vColor));
 
      gl_FragColor = vec4(vec3(finalColor), 1.0);
