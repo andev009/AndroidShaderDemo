@@ -6,7 +6,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import com.andev.androidshaderdemo.R;
 import com.andev.androidshaderdemo.data.VertexArray;
-import com.andev.androidshaderdemo.programs.TwoTextureShaderProgram;
+import com.andev.androidshaderdemo.programs.SharpShaderProgram;
 import com.andev.androidshaderdemo.util.TextureHelper;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -19,7 +19,7 @@ import static android.opengl.GLES20.glViewport;
 import static com.andev.androidshaderdemo.Constants.BYTES_PER_FLOAT;
 
 
-public class TwoTextureRender implements GLSurfaceView.Renderer{
+public class SharpRender implements GLSurfaceView.Renderer{
 
 	private static final int POSITION_COMPONENT_COUNT = 2;
 	private static final int TEXTURE_COORDINATES_COMPONENT_COUNT = 2;
@@ -35,7 +35,7 @@ public class TwoTextureRender implements GLSurfaceView.Renderer{
 
 	Context context;
 	VertexArray vertexArray;
-	TwoTextureShaderProgram twoTextureShaderProgram;
+	SharpShaderProgram sharpShaderProgram;
 	private int originTexture;
 	private int edgeTexture;
 	private int hefeMapTexture;
@@ -47,7 +47,7 @@ public class TwoTextureRender implements GLSurfaceView.Renderer{
 	private int width;
 	private int height;
 
-	public TwoTextureRender(Context context){
+	public SharpRender(Context context){
 		this.context = context;
 		vertexArray = new VertexArray(CUBE);
 	}
@@ -56,7 +56,7 @@ public class TwoTextureRender implements GLSurfaceView.Renderer{
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-		twoTextureShaderProgram = new TwoTextureShaderProgram(context);
+		sharpShaderProgram = new SharpShaderProgram(context);
 		originTexture = TextureHelper.loadTexture(context, R.drawable.lena);
 		edgeTexture = TextureHelper.loadTexture(context, R.drawable.edgeburn);
 
@@ -79,18 +79,18 @@ public class TwoTextureRender implements GLSurfaceView.Renderer{
 //		Log.w("wf", 1.0f / width + "");
 //		Log.w("hf", 1.0f / height + "");
 
-		twoTextureShaderProgram.useProgram();
-		twoTextureShaderProgram.setUniforms(textureIDs, 1.0f / width, 1.0f / height);
+		sharpShaderProgram.useProgram();
+		sharpShaderProgram.setUniforms(textureIDs, 1.0f / width, 1.0f / height);
 
 		vertexArray.setVertexAttribPointer(
 				0,
-				twoTextureShaderProgram.getPositionAttributeLocation(),
+				sharpShaderProgram.getPositionAttributeLocation(),
 				POSITION_COMPONENT_COUNT,
 				STRIDE);
 
 		vertexArray.setVertexAttribPointer(
 				POSITION_COMPONENT_COUNT,
-				twoTextureShaderProgram.getTextureCoordinatesAttributeLocation(),
+				sharpShaderProgram.getTextureCoordinatesAttributeLocation(),
 				TEXTURE_COORDINATES_COMPONENT_COUNT,
 				STRIDE);
 		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);

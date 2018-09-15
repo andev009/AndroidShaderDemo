@@ -14,7 +14,7 @@ import static android.opengl.GLES20.glGetUniformLocation;
 import static android.opengl.GLES20.glUniform1f;
 import static android.opengl.GLES20.glUniform1i;
 
-public class TwoTextureShaderProgram extends ShaderProgram{
+public class SharpShaderProgram extends ShaderProgram{
 	private final int []uTextureUnitLocation;
 	private final int uStrength;
 	private final int uWidthFactor;
@@ -23,8 +23,8 @@ public class TwoTextureShaderProgram extends ShaderProgram{
 	private final int aPositionLocation;
 	private final int aTextureCoordinatesLocation;
 
-	public TwoTextureShaderProgram(Context context) {
-		super(context, R.raw.two_texture_vertex_shader, R.raw.two_texture_fragment_shader);
+	public SharpShaderProgram(Context context) {
+		super(context, R.raw.base_sample_vertex_shader, R.raw.sharp_fragment_shader);
 
 		aPositionLocation = glGetAttribLocation(program, A_POSITION);
 		aTextureCoordinatesLocation = glGetAttribLocation(program, A_TEXTURE_COORDINATES);

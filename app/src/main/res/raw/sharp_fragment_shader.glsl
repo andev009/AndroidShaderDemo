@@ -39,14 +39,6 @@ void main()
 
      mediump vec3 finalColor = textureColor * 9.0 - aroundColor;
 
-//     mediump vec3 aroundColor = leftTextureColor * -2.0 + rightTextureColor * 2.0 +
-//                                 topTextureColor * 0.0 + bottomTextureColor * 0.0  +
-//                                 leftTopTextureColor * -1.0 + rightTopTextureColor * 1.0+
-//                                 leftBottomTextureColor * -1.0 + rightBottomTextureColor * 1.0;
-//     mediump vec3 finalColor = aroundColor  + textureColor * 0.0;
-
-
-
      //gray(luminance)
 //     float luminance = dot(textureColor.rgb, W);
 //     finalColor = vec3(luminance);

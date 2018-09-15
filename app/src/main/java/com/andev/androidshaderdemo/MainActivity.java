@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
 			intent.putExtra("type", 2);
 			startActivity(intent);
-		} else if ("TwoTextureRender".equals(section)) {
+		} else if ("SharpRender".equals(section)) {
 			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
 			intent.putExtra("type", 3);
 			startActivity(intent);

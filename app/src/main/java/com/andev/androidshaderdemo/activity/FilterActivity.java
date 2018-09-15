@@ -13,10 +13,10 @@ import android.widget.Toast;
 import com.andev.androidshaderdemo.R;
 import com.andev.androidshaderdemo.render.BaseRender;
 import com.andev.androidshaderdemo.render.MultiTextureRender;
+import com.andev.androidshaderdemo.render.SharpRender;
 import com.andev.androidshaderdemo.render.SimpleRender;
 import com.andev.androidshaderdemo.render.SimpleTextureRender;
 import com.andev.androidshaderdemo.render.TwoFilterRender;
-import com.andev.androidshaderdemo.render.TwoTextureRender;
 
 
 public class FilterActivity extends AppCompatActivity {
@@ -88,7 +88,7 @@ public class FilterActivity extends AppCompatActivity {
 	}
 
 	private void setTwoTextureRender(){
-		TwoTextureRender twoTextureRender = new TwoTextureRender(this);
+		SharpRender twoTextureRender = new SharpRender(this);
 		glSurfaceView.setRenderer(twoTextureRender);
 	}
 

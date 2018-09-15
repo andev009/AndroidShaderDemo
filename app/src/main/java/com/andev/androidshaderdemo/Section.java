@@ -11,7 +11,7 @@ public class Section {
 		sectionList.add("SimpleRender");
 		sectionList.add("SimpleTextureRender");
 		sectionList.add("MultiTextureRender");
-		sectionList.add("TwoTextureRender");
+		sectionList.add("SharpRender");
 		sectionList.add("TwoFilterRender");
 		sectionList.add("Mosaic");
 	}
