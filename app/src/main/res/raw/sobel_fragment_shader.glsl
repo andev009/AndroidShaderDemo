@@ -39,11 +39,13 @@ void main()
      float leftBottoml = dot(leftBottomTextureColor.rgb, W);
      float rightBottoml = dot(rightBottomTextureColor.rgb, W);
 
+     //水平方向
      float hColor = leftl * -2.0 + rightl * 2.0 +
                     topl * 0 + bottoml * 0 +
                     leftTopl * -1.0 + rightTopl * 1.0 +
                     leftBottoml * -1.0 +rightBottoml * 1.0;
 
+     //垂直方向
      float vColor = leftl * 0.0 + rightl * 0.0 +
                     topl * -2.0 + bottoml * 2.0 +
                     leftTopl * -1.0 + rightTopl * -1.0 +
