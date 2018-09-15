@@ -14,6 +14,7 @@ public class Section {
 		sectionList.add("SharpRender");
 		sectionList.add("TwoFilterRender");
 		sectionList.add("Mosaic");
+		sectionList.add("Sobel Edge Detector");
 	}
 
 	List<String> getSectionList(){

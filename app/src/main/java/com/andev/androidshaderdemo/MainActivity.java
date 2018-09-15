@@ -56,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
 			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
 			intent.putExtra("type", 5);
 			startActivity(intent);
+		}else if ("Sobel Edge Detector".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+			intent.putExtra("type", 6);
+			startActivity(intent);
 		}
 
 	}

@@ -42,8 +42,4 @@ public class ShaderProgram {
 		glUseProgram(program);
 	}
 
-
-
-
-
 }

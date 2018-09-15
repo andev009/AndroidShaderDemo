@@ -4,9 +4,10 @@ package com.andev.androidshaderdemo.render;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+
 import com.andev.androidshaderdemo.R;
 import com.andev.androidshaderdemo.data.VertexArray;
-import com.andev.androidshaderdemo.programs.SharpShaderProgram;
+import com.andev.androidshaderdemo.programs.BaseSampleProgram;
 import com.andev.androidshaderdemo.util.TextureHelper;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -18,8 +19,7 @@ import static android.opengl.GLES20.glClearColor;
 import static android.opengl.GLES20.glViewport;
 import static com.andev.androidshaderdemo.Constants.BYTES_PER_FLOAT;
 
-
-public class SharpRender implements GLSurfaceView.Renderer{
+public class BaseSampleRender  implements GLSurfaceView.Renderer{
 
 	private static final int POSITION_COMPONENT_COUNT = 2;
 	private static final int TEXTURE_COORDINATES_COMPONENT_COUNT = 2;
@@ -35,27 +35,34 @@ public class SharpRender implements GLSurfaceView.Renderer{
 
 	Context context;
 	VertexArray vertexArray;
-	SharpShaderProgram sharpShaderProgram;
-	private int originTexture;
+	BaseSampleProgram baseSampleProgram;
 
-	private int[] textureIDs;
+	private int texture;
 
 	private int width;
 	private int height;
 
-	public SharpRender(Context context){
+	private int vertexShader;
+	private int fragmentShader;
+
+	public BaseSampleRender(Context context){
 		this.context = context;
 		vertexArray = new VertexArray(CUBE);
+	}
+
+	public BaseSampleRender(Context context, int vertexShader, int fragmentShader){
+		this.context = context;
+		vertexArray = new VertexArray(CUBE);
+		this.vertexShader =  vertexShader;
+		this.fragmentShader = fragmentShader;
 	}
 
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-		sharpShaderProgram = new SharpShaderProgram(context);
-		originTexture = TextureHelper.loadTexture(context, R.drawable.lena);
-
-		textureIDs = new int[]{originTexture};
+		baseSampleProgram = new BaseSampleProgram(context, vertexShader, fragmentShader);
+		texture = TextureHelper.loadTexture(context, R.drawable.lena);
 	}
 
 	@Override
@@ -70,20 +77,21 @@ public class SharpRender implements GLSurfaceView.Renderer{
 	public void onDrawFrame(GL10 gl) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		sharpShaderProgram.useProgram();
-		sharpShaderProgram.setUniforms(textureIDs, 1.0f / width, 1.0f / height);
+		baseSampleProgram.useProgram();
+		baseSampleProgram.setUniforms(texture, 1.0f / width, 1.0f / height);
 
 		vertexArray.setVertexAttribPointer(
 				0,
-				sharpShaderProgram.getPositionAttributeLocation(),
+				baseSampleProgram.getPositionAttributeLocation(),
 				POSITION_COMPONENT_COUNT,
 				STRIDE);
 
 		vertexArray.setVertexAttribPointer(
 				POSITION_COMPONENT_COUNT,
-				sharpShaderProgram.getTextureCoordinatesAttributeLocation(),
+				baseSampleProgram.getTextureCoordinatesAttributeLocation(),
 				TEXTURE_COORDINATES_COMPONENT_COUNT,
 				STRIDE);
 		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
+
 	}
 }

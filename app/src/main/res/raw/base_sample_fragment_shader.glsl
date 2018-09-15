@@ -13,7 +13,6 @@ varying highp vec2 v_rightTopTextureCoordinate;//右上角
 varying highp vec2 v_leftBottomTextureCoordinate;//左下角
 varying highp vec2 v_rightBottomTextureCoordinate;//右上角
 
-const highp vec3 W = vec3(0.2125, 0.7154, 0.0721);
 
 void main()
 {
@@ -30,15 +29,5 @@ void main()
      mediump vec3 rightBottomTextureColor = texture2D(u_TextureUnit0, v_rightBottomTextureCoordinate).rgb;
 
 
-     //sharp
-     mediump vec3 aroundColor = leftTextureColor * 2.0 + rightTextureColor * 2.0 +
-                                 topTextureColor * 2.0 + bottomTextureColor * 2.0;
-
-     mediump vec3 finalColor = textureColor * 9.0 - aroundColor;
-
-     //gray(luminance)
-//     float luminance = dot(textureColor.rgb, W);
-//     finalColor = vec3(luminance);
-
-     gl_FragColor = vec4(finalColor, 1.0);
+     gl_FragColor = vec4(textureColor, 1.0);
 }

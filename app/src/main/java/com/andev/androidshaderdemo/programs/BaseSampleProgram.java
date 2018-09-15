@@ -12,10 +12,9 @@ import static android.opengl.GLES20.glBindTexture;
 import static android.opengl.GLES20.glGetAttribLocation;
 import static android.opengl.GLES20.glGetUniformLocation;
 import static android.opengl.GLES20.glUniform1f;
-import static android.opengl.GLES20.glUniform1i;
 
-public class SharpShaderProgram extends ShaderProgram{
-	private final int []uTextureUnitLocation;
+public class BaseSampleProgram extends ShaderProgram {
+	private final int uTextureUnitLocation;
 	private final int uStrength;
 	private final int uWidthFactor;
 	private final int uHeightFactor;
@@ -23,8 +22,8 @@ public class SharpShaderProgram extends ShaderProgram{
 	private final int aPositionLocation;
 	private final int aTextureCoordinatesLocation;
 
-	public SharpShaderProgram(Context context) {
-		super(context, R.raw.base_sample_vertex_shader, R.raw.sharp_fragment_shader);
+	public BaseSampleProgram(Context context) {
+		super(context, R.raw.base_sample_vertex_shader, R.raw.base_sample_fragment_shader);
 
 		aPositionLocation = glGetAttribLocation(program, A_POSITION);
 		aTextureCoordinatesLocation = glGetAttribLocation(program, A_TEXTURE_COORDINATES);
@@ -33,19 +32,28 @@ public class SharpShaderProgram extends ShaderProgram{
 		uWidthFactor = glGetUniformLocation(program, U_WIDTH_FACTOR);
 		uHeightFactor = glGetUniformLocation(program, U_HEIGHT_FACTOR);
 
-		uTextureUnitLocation = new int[1];
-
-		for(int i = 0; i < uTextureUnitLocation.length; i++){
-			uTextureUnitLocation[i] = glGetUniformLocation(program, U_TEXTURE_UNIT + i);
-		}
+		uTextureUnitLocation =  glGetUniformLocation(program, U_TEXTURE_UNIT);
 	}
 
-	public void setUniforms(int [] textureIDs, float widthFactor, float heightFactor) {
-		for(int i = 0; i < textureIDs.length; i++){
-			glActiveTexture(GL_TEXTURE0  + i);
-			glBindTexture(GL_TEXTURE_2D, textureIDs[i]);
-			glUniform1i(uTextureUnitLocation[i], i);
-		}
+	public BaseSampleProgram(Context context, int vertexShader, int fragmentShader){
+		super(context, vertexShader, fragmentShader);
+
+		aPositionLocation = glGetAttribLocation(program, A_POSITION);
+		aTextureCoordinatesLocation = glGetAttribLocation(program, A_TEXTURE_COORDINATES);
+
+		uStrength = glGetUniformLocation(program, U_STRENGTH);
+		uWidthFactor = glGetUniformLocation(program, U_WIDTH_FACTOR);
+		uHeightFactor = glGetUniformLocation(program, U_HEIGHT_FACTOR);
+
+		uTextureUnitLocation =  glGetUniformLocation(program, U_TEXTURE_UNIT);
+	}
+
+	public void setUniforms(int textureId, float widthFactor, float heightFactor) {
+		// Set the active texture unit to texture unit 0.
+		glActiveTexture(GL_TEXTURE0);
+
+		// Bind the texture to this unit.
+		glBindTexture(GL_TEXTURE_2D, textureId);
 
 		glUniform1f(uWidthFactor, widthFactor);
 		glUniform1f(uHeightFactor, heightFactor);
@@ -60,4 +68,5 @@ public class SharpShaderProgram extends ShaderProgram{
 	public int getTextureCoordinatesAttributeLocation() {
 		return aTextureCoordinatesLocation;
 	}
+
 }
