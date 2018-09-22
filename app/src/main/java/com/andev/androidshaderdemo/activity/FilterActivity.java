@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.andev.androidshaderdemo.R;
 import com.andev.androidshaderdemo.render.BaseRender;
 import com.andev.androidshaderdemo.render.BaseSampleRender;
+import com.andev.androidshaderdemo.render.CannyRender;
 import com.andev.androidshaderdemo.render.MultiTextureRender;
 import com.andev.androidshaderdemo.render.SharpRender;
 import com.andev.androidshaderdemo.render.SimpleRender;
@@ -72,6 +73,8 @@ public class FilterActivity extends AppCompatActivity {
 			setMosaicRender();
 		}else if(type == 6){
 			setSobelRender();
+		}else if(type == 7){
+			setCannyRender();
 		}
 	}
 
@@ -108,6 +111,11 @@ public class FilterActivity extends AppCompatActivity {
 	private void setSobelRender(){
 		BaseSampleRender baseSampleRender = new BaseSampleRender(this, R.raw.base_sample_vertex_shader, R.raw.sobel_fragment_shader);
 		glSurfaceView.setRenderer(baseSampleRender);
+	}
+
+	private void setCannyRender(){
+		CannyRender cannyRender = new CannyRender(this);
+		glSurfaceView.setRenderer(cannyRender);
 	}
 
 	@Override

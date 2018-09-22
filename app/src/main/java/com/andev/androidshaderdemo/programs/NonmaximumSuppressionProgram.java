@@ -12,9 +12,8 @@ import static android.opengl.GLES20.glBindTexture;
 import static android.opengl.GLES20.glGetAttribLocation;
 import static android.opengl.GLES20.glGetUniformLocation;
 import static android.opengl.GLES20.glUniform1f;
-import static android.opengl.GLES20.glUniform1i;
 
-public class TwoFilterTwoProgram extends ShaderProgram{
+public class NonmaximumSuppressionProgram extends ShaderProgram{
 	private final int []uTextureUnitLocation;
 
 	private final int texelWidthOffsetLocation;
@@ -23,8 +22,8 @@ public class TwoFilterTwoProgram extends ShaderProgram{
 	private final int aPositionLocation;
 	private final int aTextureCoordinatesLocation;
 
-	public TwoFilterTwoProgram(Context context) {
-		super(context, R.raw.two_filter_two_vertex_shader, R.raw.two_filter_two_fragment_shader);
+	public NonmaximumSuppressionProgram(Context context) {
+		super(context, R.raw.simple_texture_vertex_shader, R.raw.nonmaximumsuppression_fragment_shader);
 
 		aPositionLocation = glGetAttribLocation(program, A_POSITION);
 		aTextureCoordinatesLocation = glGetAttribLocation(program, A_TEXTURE_COORDINATES);
@@ -33,23 +32,24 @@ public class TwoFilterTwoProgram extends ShaderProgram{
 		texelWidthOffsetLocation = glGetUniformLocation(program, TexelWidthOffset);
 		texelHeightOffsetLocation = glGetUniformLocation(program, TexelHeightOffset);
 
-		uTextureUnitLocation = new int[2];
+		uTextureUnitLocation = new int[1];
 
 		for(int i = 0; i < uTextureUnitLocation.length; i++){
 			uTextureUnitLocation[i] = glGetUniformLocation(program, U_TEXTURE_UNIT + i);
 		}
 	}
 
-	public void setUniforms(int [] textureIDs, float widthFactor, float heightFactor) {
-		for(int i = 0; i < textureIDs.length; i++){
-			glActiveTexture(GL_TEXTURE0  + i);
-			glBindTexture(GL_TEXTURE_2D, textureIDs[i]);
-			glUniform1i(uTextureUnitLocation[i], i);
-		}
+	public void setUniforms(int textureId, float widthFactor, float heightFactor) {
+		// Set the active texture unit to texture unit 0.
+		glActiveTexture(GL_TEXTURE0);
+
+		// Bind the texture to this unit.
+		glBindTexture(GL_TEXTURE_2D, textureId);
 
 		glUniform1f(texelWidthOffsetLocation, widthFactor);
 		glUniform1f(texelHeightOffsetLocation, heightFactor);
 	}
+
 
 	public int getPositionAttributeLocation() {
 		return aPositionLocation;
@@ -59,3 +59,4 @@ public class TwoFilterTwoProgram extends ShaderProgram{
 		return aTextureCoordinatesLocation;
 	}
 }
+

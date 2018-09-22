@@ -15,6 +15,7 @@ public class Section {
 		sectionList.add("TwoFilterRender");
 		sectionList.add("Mosaic");
 		sectionList.add("Sobel Edge Detector");
+		sectionList.add("Canny Edge Detector");
 	}
 
 	List<String> getSectionList(){
