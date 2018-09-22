@@ -9,7 +9,6 @@ import com.andev.androidshaderdemo.data.VertexArray;
 import com.andev.androidshaderdemo.programs.BaseProgram;
 import com.andev.androidshaderdemo.programs.BaseSampleProgram;
 import com.andev.androidshaderdemo.programs.GaussianProgram;
-import com.andev.androidshaderdemo.programs.SimpleTextureShaderProgram;
 import com.andev.androidshaderdemo.util.TextureHelper;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -52,8 +51,6 @@ public class CannyRender implements GLSurfaceView.Renderer {
 	BaseProgram nonmaximumSuppressionProgram;
 	BaseSampleProgram weakPixelInclusionProgram;
 
-	SimpleTextureShaderProgram simpleTextureShaderProgram;
-
 	private int originTexture;
 
 	private int[] textureIDs;
@@ -78,9 +75,6 @@ public class CannyRender implements GLSurfaceView.Renderer {
 		sobelProgram = new BaseSampleProgram(context, R.raw.base_sample_vertex_shader, R.raw.canny_sobel_step_fragment_shader);
 		nonmaximumSuppressionProgram = new BaseProgram(context, R.raw.simple_texture_vertex_shader, R.raw.nonmaximumsuppression_fragment_shader);
 		weakPixelInclusionProgram = new BaseSampleProgram(context, R.raw.base_sample_vertex_shader, R.raw.weakpixelinclusion_fragment_shader);
-
-
-		simpleTextureShaderProgram =  new SimpleTextureShaderProgram(context);
 
 		originTexture = TextureHelper.loadTexture(context, R.drawable.lena);
 
@@ -193,7 +187,6 @@ public class CannyRender implements GLSurfaceView.Renderer {
 		//render to screen,weakPixelInclusion
 		weakPixelInclusionProgram.useProgram();
 		weakPixelInclusionProgram.setUniforms(mFrameBufferTextures[2], 1.0f / width, 1.0f / height);
-		//simpleTextureShaderProgram.setUniforms(mFrameBufferTextures[2]);
 
 		flipVertexArray.setVertexAttribPointer(
 				0,
