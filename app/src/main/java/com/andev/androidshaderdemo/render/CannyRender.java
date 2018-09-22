@@ -200,6 +200,5 @@ public class CannyRender implements GLSurfaceView.Renderer {
 				TEXTURE_COORDINATES_COMPONENT_COUNT,
 				STRIDE);
 		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
-
 	}
 }
