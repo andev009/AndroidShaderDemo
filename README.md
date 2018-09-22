@@ -12,5 +12,7 @@ Android平台OpenGL SE Camera滤镜实现Demo
 
 [《Android基于Shader的图像处理(3)-马赛克》](https://www.jianshu.com/p/3797db1e2c33)
 
-[《Android基于Shader的图像处理(4)-边缘检测》](https://www.jianshu.com/p/7081419470ac)
+[《Android基于Shader的图像处理(4)-Sobel边缘检测》](https://www.jianshu.com/p/7081419470ac)
+
+[《Android基于Shader的图像处理(5)-Canny边缘检测》](https://www.jianshu.com/p/bf18d3cf8bf7)
 
