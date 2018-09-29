@@ -44,7 +44,7 @@ void main()
 
      //水平方向
      gradientDirection.x = leftl * -2.0 + rightl * 2.0 +
-                    topl * 0 + bottoml * 0 +
+                    topl * 0.0 + bottoml * 0.0 +
                     leftTopl * -1.0 + rightTopl * 1.0 +
                     leftBottoml * -1.0 +rightBottoml * 1.0;
 

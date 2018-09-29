@@ -7,8 +7,8 @@ uniform sampler2D u_TextureUnit0;
 
 uniform highp float texelWidthOffset;
 uniform highp float texelHeightOffset;
-uniform mediump float upperThreshold = 0.4;
-uniform mediump float lowerThreshold = 0.1;
+const mediump float upperThreshold = 0.4;
+const mediump float lowerThreshold = 0.1;
 
 void main()
  {

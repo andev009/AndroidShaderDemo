@@ -8,5 +8,8 @@ uniform float texelHeightOffset;
 const highp vec3 W = vec3(0.2125, 0.7154, 0.0721);
 void main()
 {
-   gl_FragColor = texture2D(u_TextureUnit, v_TextureCoordinates);
+    vec3 textureColor = texture2D(u_TextureUnit, v_TextureCoordinates).rgb;
+    float luminance = dot(textureColor.rgb, W);
+
+    gl_FragColor = vec4(vec3(luminance), 1.0);
 }

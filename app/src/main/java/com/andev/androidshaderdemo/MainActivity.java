@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.andev.androidshaderdemo.activity.CameraActivity;
 import com.andev.androidshaderdemo.activity.FilterActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
 		}else if ("Canny Edge Detector".equals(section)) {
 			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
 			intent.putExtra("type", 7);
+			startActivity(intent);
+		}else if ("Camera".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, CameraActivity.class);
 			startActivity(intent);
 		}
 

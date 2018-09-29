@@ -16,6 +16,7 @@ public class Section {
 		sectionList.add("Mosaic");
 		sectionList.add("Sobel Edge Detector");
 		sectionList.add("Canny Edge Detector");
+		sectionList.add("Camera");
 	}
 
 	List<String> getSectionList(){
