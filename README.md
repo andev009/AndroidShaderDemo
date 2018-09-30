@@ -16,3 +16,5 @@ Android平台OpenGL SE Camera滤镜实现Demo
 
 [《Android基于Shader的图像处理(5)-Canny边缘检测》](https://www.jianshu.com/p/bf18d3cf8bf7)
 
+[《Android基于Shader的图像处理(6)-Camera开发》](https://www.jianshu.com/p/36c04e889962)
+
