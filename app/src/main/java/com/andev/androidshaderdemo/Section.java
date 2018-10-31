@@ -17,6 +17,7 @@ public class Section {
 		sectionList.add("Sobel Edge Detector");
 		sectionList.add("Canny Edge Detector");
 		sectionList.add("Camera");
+		sectionList.add("Native OpenGL ES");
 	}
 
 	List<String> getSectionList(){

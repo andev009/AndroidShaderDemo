@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.andev.androidshaderdemo.activity.CameraActivity;
 import com.andev.androidshaderdemo.activity.FilterActivity;
+import com.andev.androidshaderdemo.activity.NativeActivity;
 
 public class MainActivity extends AppCompatActivity {
 	ListView listView;
@@ -67,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
 			startActivity(intent);
 		}else if ("Camera".equals(section)) {
 			Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+			startActivity(intent);
+		}else if ("Native OpenGL ES".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, NativeActivity.class);
 			startActivity(intent);
 		}
 

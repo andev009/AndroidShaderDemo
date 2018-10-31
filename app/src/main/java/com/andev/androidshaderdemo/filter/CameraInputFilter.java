@@ -2,6 +2,7 @@ package com.andev.androidshaderdemo.filter;
 
 
 import android.content.Context;
+import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 
 import com.andev.androidshaderdemo.data.VertexArray;
@@ -83,6 +84,7 @@ public class CameraInputFilter {
 				STRIDE);
 		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
 
+		GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, 0);
 		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
 		return mFrameBufferTextures[0];
 	}
