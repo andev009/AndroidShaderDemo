@@ -36,7 +36,7 @@ public class NativeActivity extends Activity implements SurfaceHolder.Callback{
 		surfaceView = new SurfaceView(this);
 		surfaceView.getHolder().addCallback(this);
 
-		root.addView(surfaceView);
+		root.addView(surfaceView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 	}
 
 	@Override
@@ -44,16 +44,16 @@ public class NativeActivity extends Activity implements SurfaceHolder.Callback{
 		nativeController = new NativeController();
 		nativeController.init();
 		nativeController.setSurface(holder.getSurface());
+	}
+
+	@Override
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+		nativeController.resetSize(width, height);
 
 		Resources resources = getResources();
 
 		Bitmap bitmap = BitmapFactory.decodeResource(resources, R.drawable.face);
 		nativeController.showBitmap(bitmap);
-	}
-
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
 	}
 
 	@Override

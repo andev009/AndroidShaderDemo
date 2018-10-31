@@ -30,8 +30,10 @@ JNIEXPORT void JNICALL Java_com_andev_androidshaderdemo_nativedemo_NativeControl
 
 JNIEXPORT void JNICALL Java_com_andev_androidshaderdemo_nativedemo_NativeController_resetSize
   (JNIEnv * env, jobject obj, jint width, jint height){
-
-  }
+   if (NULL != controller) {
+		controller->resetSize(width, height);
+   }
+}
 
 
 JNIEXPORT void JNICALL Java_com_andev_androidshaderdemo_nativedemo_NativeController_showBitmap
