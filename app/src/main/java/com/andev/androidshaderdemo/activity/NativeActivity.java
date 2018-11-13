@@ -51,7 +51,6 @@ public class NativeActivity extends Activity implements SurfaceHolder.Callback{
 		nativeController.resetSize(width, height);
 
 		Resources resources = getResources();
-
 		Bitmap bitmap = BitmapFactory.decodeResource(resources, R.drawable.face);
 		nativeController.showBitmap(bitmap);
 	}

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.andev.androidshaderdemo.activity.CameraActivity;
+import com.andev.androidshaderdemo.activity.EGLActivity;
 import com.andev.androidshaderdemo.activity.FilterActivity;
 import com.andev.androidshaderdemo.activity.NativeActivity;
 
@@ -71,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
 			startActivity(intent);
 		}else if ("Native OpenGL ES".equals(section)) {
 			Intent intent = new Intent(MainActivity.this, NativeActivity.class);
+			startActivity(intent);
+		}else if ("Java EGL".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, EGLActivity.class);
 			startActivity(intent);
 		}
 
