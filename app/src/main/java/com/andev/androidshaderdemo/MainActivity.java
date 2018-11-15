@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.andev.androidshaderdemo.activity.CameraActivity;
 import com.andev.androidshaderdemo.activity.EGLActivity;
 import com.andev.androidshaderdemo.activity.FilterActivity;
+import com.andev.androidshaderdemo.activity.LUTActivity;
 import com.andev.androidshaderdemo.activity.NativeActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
 			startActivity(intent);
 		}else if ("Java EGL".equals(section)) {
 			Intent intent = new Intent(MainActivity.this, EGLActivity.class);
+			startActivity(intent);
+		}else if ("Color Lookup Table(LUT)".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, LUTActivity.class);
 			startActivity(intent);
 		}
 

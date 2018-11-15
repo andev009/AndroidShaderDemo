@@ -25,6 +25,7 @@
         <activity android:name=".activity.CameraActivity"/>
         <activity android:name=".activity.NativeActivity"/>
         <activity android:name=".activity.EGLActivity"/>
+        <activity android:name=".activity.LUTActivity"/>
     </application>
 
 </manifest>
