@@ -18,6 +18,10 @@ Android平台OpenGL SE Camera滤镜实现Demo
 
 [《Android基于Shader的图像处理(6)-Camera开发》](https://www.jianshu.com/p/36c04e889962)
 
+[《Android基于Shader的图像处理(7)-颜色表LUT》](https://www.jianshu.com/p/6f35c720c7bf)
+
 [《Android Native层 OpenGL ES开发》](https://www.jianshu.com/p/53ce56463c32)
 
 [《Android java层封装EGL》](https://www.jianshu.com/p/5376029fbd2e)
+
+
