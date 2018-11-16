@@ -20,6 +20,7 @@ import static com.andev.androidshaderdemo.Constants.BYTES_PER_FLOAT;
 
 
 public class LUTRender implements GLSurfaceView.Renderer{
+	private static final String TAG = "LUTRender";
 	private static final int POSITION_COMPONENT_COUNT = 2;
 	private static final int TEXTURE_COORDINATES_COMPONENT_COUNT = 2;
 	private static final int STRIDE = (POSITION_COMPONENT_COUNT

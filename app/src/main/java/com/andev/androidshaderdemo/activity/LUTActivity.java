@@ -24,8 +24,7 @@ public class LUTActivity extends AppCompatActivity {
 		LUTRender lutRender = new LUTRender(this);
 		glSurfaceView.setRenderer(lutRender);
 
-//		MultiTextureRender multiTextureRender = new MultiTextureRender(this);
-//		glSurfaceView.setRenderer(multiTextureRender);
+		glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
 
 	@Override
