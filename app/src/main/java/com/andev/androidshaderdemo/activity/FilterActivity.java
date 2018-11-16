@@ -15,6 +15,7 @@ import com.andev.androidshaderdemo.render.BaseRender;
 import com.andev.androidshaderdemo.render.BaseSampleRender;
 import com.andev.androidshaderdemo.render.CannyRender;
 import com.andev.androidshaderdemo.render.MultiTextureRender;
+import com.andev.androidshaderdemo.render.ScaleRender;
 import com.andev.androidshaderdemo.render.SharpRender;
 import com.andev.androidshaderdemo.render.SimpleRender;
 import com.andev.androidshaderdemo.render.SimpleTextureRender;
@@ -75,6 +76,8 @@ public class FilterActivity extends AppCompatActivity {
 			setSobelRender();
 		}else if(type == 7){
 			setCannyRender();
+		}else if(type == 8){
+			setScaleRender();
 		}
 	}
 
@@ -116,6 +119,11 @@ public class FilterActivity extends AppCompatActivity {
 	private void setCannyRender(){
 		CannyRender cannyRender = new CannyRender(this);
 		glSurfaceView.setRenderer(cannyRender);
+	}
+
+	private void setScaleRender(){
+		ScaleRender scaleRender = new ScaleRender(this);
+		glSurfaceView.setRenderer(scaleRender);
 	}
 
 	@Override

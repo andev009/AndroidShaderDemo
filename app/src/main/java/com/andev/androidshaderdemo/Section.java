@@ -20,6 +20,7 @@ public class Section {
 		sectionList.add("Native OpenGL ES");
 		sectionList.add("Java EGL");
 		sectionList.add("Color Lookup Table(LUT)");
+		sectionList.add("Scale Animation");
 	}
 
 	List<String> getSectionList(){

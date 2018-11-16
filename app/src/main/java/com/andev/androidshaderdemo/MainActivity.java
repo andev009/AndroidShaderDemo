@@ -80,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
 		}else if ("Color Lookup Table(LUT)".equals(section)) {
 			Intent intent = new Intent(MainActivity.this, LUTActivity.class);
 			startActivity(intent);
+		}else if ("Scale Animation".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+			intent.putExtra("type", 8);
+			startActivity(intent);
 		}
 
 	}
