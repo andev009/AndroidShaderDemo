@@ -85,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
 			intent.putExtra("type", 8);
 			startActivity(intent);
 		}
+		else if ("Flash White".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+			intent.putExtra("type", 9);
+			startActivity(intent);
+		}
 
 	}
 

@@ -18,6 +18,7 @@ public class ShaderProgram {
 	protected static final String U_HEIGHT_FACTOR = "u_imageHeightFactor";
 	protected static final String U_TEXTURE_TRANSFORM = "u_textureTransform";
 	protected static final String U_MVPMATRIX = "uMvpMatrix";
+	protected static final String U_FLASHPARAM = "uflashParam";
 
 	protected static final String TexelWidthOffset = "texelWidthOffset";
 	protected static final String TexelHeightOffset = "texelHeightOffset";

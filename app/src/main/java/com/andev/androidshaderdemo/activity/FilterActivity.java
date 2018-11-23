@@ -14,6 +14,7 @@ import com.andev.androidshaderdemo.R;
 import com.andev.androidshaderdemo.render.BaseRender;
 import com.andev.androidshaderdemo.render.BaseSampleRender;
 import com.andev.androidshaderdemo.render.CannyRender;
+import com.andev.androidshaderdemo.render.FlashWhiteRender;
 import com.andev.androidshaderdemo.render.MultiTextureRender;
 import com.andev.androidshaderdemo.render.ScaleRender;
 import com.andev.androidshaderdemo.render.SharpRender;
@@ -78,6 +79,8 @@ public class FilterActivity extends AppCompatActivity {
 			setCannyRender();
 		}else if(type == 8){
 			setScaleRender();
+		}else if(type == 9){
+			setFlashWhiteRender();
 		}
 	}
 
@@ -124,6 +127,11 @@ public class FilterActivity extends AppCompatActivity {
 	private void setScaleRender(){
 		ScaleRender scaleRender = new ScaleRender(this);
 		glSurfaceView.setRenderer(scaleRender);
+	}
+
+	private void setFlashWhiteRender(){
+		FlashWhiteRender flashWhiteRender = new FlashWhiteRender(this);
+		glSurfaceView.setRenderer(flashWhiteRender);
 	}
 
 	@Override

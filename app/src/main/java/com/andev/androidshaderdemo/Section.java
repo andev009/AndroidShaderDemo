@@ -21,6 +21,7 @@ public class Section {
 		sectionList.add("Java EGL");
 		sectionList.add("Color Lookup Table(LUT)");
 		sectionList.add("Scale Animation");
+		sectionList.add("Flash White");
 	}
 
 	List<String> getSectionList(){
