@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.andev.androidshaderdemo.R;
 import com.andev.androidshaderdemo.render.BaseRender;
 import com.andev.androidshaderdemo.render.BaseSampleRender;
+import com.andev.androidshaderdemo.render.BurrRender;
 import com.andev.androidshaderdemo.render.CannyRender;
 import com.andev.androidshaderdemo.render.FlashWhiteRender;
 import com.andev.androidshaderdemo.render.MultiTextureRender;
@@ -81,6 +82,8 @@ public class FilterActivity extends AppCompatActivity {
 			setScaleRender();
 		}else if(type == 9){
 			setFlashWhiteRender();
+		}else if(type == 10){
+			setBurrRender();
 		}
 	}
 
@@ -132,6 +135,11 @@ public class FilterActivity extends AppCompatActivity {
 	private void setFlashWhiteRender(){
 		FlashWhiteRender flashWhiteRender = new FlashWhiteRender(this);
 		glSurfaceView.setRenderer(flashWhiteRender);
+	}
+
+	private void setBurrRender(){
+		BurrRender burrRender = new BurrRender(this);
+		glSurfaceView.setRenderer(burrRender);
 	}
 
 	@Override

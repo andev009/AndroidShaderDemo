@@ -22,6 +22,7 @@ public class Section {
 		sectionList.add("Color Lookup Table(LUT)");
 		sectionList.add("Scale Animation");
 		sectionList.add("Flash White");
+		sectionList.add("Burr");
 	}
 
 	List<String> getSectionList(){
