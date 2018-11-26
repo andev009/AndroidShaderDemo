@@ -4,23 +4,30 @@ package com.andev.androidshaderdemo.render;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
 
 import com.andev.androidshaderdemo.R;
 import com.andev.androidshaderdemo.data.VertexArray;
-import com.andev.androidshaderdemo.programs.BurrProgram;
+import com.andev.androidshaderdemo.programs.AlphaTextureProgram;
 import com.andev.androidshaderdemo.util.TextureHelper;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import static android.opengl.GLES20.GL_BLEND;
 import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
+import static android.opengl.GLES20.GL_ONE;
+import static android.opengl.GLES20.GL_SRC_ALPHA;
+import static android.opengl.GLES20.glBlendFunc;
 import static android.opengl.GLES20.glClear;
 import static android.opengl.GLES20.glClearColor;
-import static android.opengl.GLES20.glUniform1f;
+import static android.opengl.GLES20.glDisable;
+import static android.opengl.GLES20.glEnable;
+import static android.opengl.GLES20.glUniformMatrix4fv;
 import static android.opengl.GLES20.glViewport;
 import static com.andev.androidshaderdemo.Constants.BYTES_PER_FLOAT;
 
-public class BurrRender implements GLSurfaceView.Renderer{
+public class SoulOutRender implements GLSurfaceView.Renderer{
 	private static final int POSITION_COMPONENT_COUNT = 2;
 	private static final int TEXTURE_COORDINATES_COMPONENT_COUNT = 2;
 	private static final int STRIDE = (POSITION_COMPONENT_COUNT
@@ -33,16 +40,18 @@ public class BurrRender implements GLSurfaceView.Renderer{
 			1.0f, 1.0f, 1f, 1f -1f,
 	};
 
-	private final int MaxFrame = 36;
-	private final int MiddleFrame = 18;
+	private float[] scaleMatrix = new float[16];
+	private float scale;
+	private final int MaxFrame = 16;
+	private final int MiddleFrame = 8;
 	private int curFrame;
 
 	Context context;
 	VertexArray vertexArray;
-	BurrProgram burrProgram;
+	AlphaTextureProgram alphaTextureProgram;
 	private int texture;
 
-	public BurrRender(Context context){
+	public SoulOutRender(Context context){
 		this.context = context;
 		vertexArray = new VertexArray(CUBE);
 	}
@@ -51,7 +60,7 @@ public class BurrRender implements GLSurfaceView.Renderer{
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-		burrProgram = new BurrProgram(context);
+		alphaTextureProgram = new AlphaTextureProgram(context);
 		texture = TextureHelper.loadTexture(context, R.drawable.lena);
 	}
 
@@ -64,37 +73,53 @@ public class BurrRender implements GLSurfaceView.Renderer{
 	public void onDrawFrame(GL10 gl) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		burrProgram.useProgram();
-		prepareDraw();
-		burrProgram.setUniforms(texture);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
+		float progress;
+		if (curFrame <= MaxFrame) {
+			progress = curFrame * 1.0f / MaxFrame;
+		} else {
+			curFrame = 0;
+			progress = 0;
+		}
+		float scale = 1f + progress * 0.3f;
+        float alpha = 0.3f - progress * 0.3f;
+		curFrame++;
+
+		drawLayer(1,1 - alpha);
+
+		drawLayer(scale, alpha);
+
+		GLES20.glUseProgram(0);
+		glDisable(GL_BLEND);
+	}
+
+	private void drawLayer(float scale, float alpha){
+		alphaTextureProgram.useProgram();
+
+		Matrix.setIdentityM(scaleMatrix, 0);
+
+		Matrix.scaleM(scaleMatrix, 0, scale, scale, scale);
+		glUniformMatrix4fv(alphaTextureProgram.getMvpMatrixLocation(), 1, false, scaleMatrix, 0);
+
+		alphaTextureProgram.setUniforms(texture, alpha);
+
+		draw();
+	}
+
+	private void draw(){
 		vertexArray.setVertexAttribPointer(
 				0,
-				burrProgram.getPositionAttributeLocation(),
+				alphaTextureProgram.getPositionAttributeLocation(),
 				POSITION_COMPONENT_COUNT,
 				STRIDE);
 
 		vertexArray.setVertexAttribPointer(
 				POSITION_COMPONENT_COUNT,
-				burrProgram.getTextureCoordinatesAttributeLocation(),
+				alphaTextureProgram.getTextureCoordinatesAttributeLocation(),
 				TEXTURE_COORDINATES_COMPONENT_COUNT,
 				STRIDE);
 		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
-	}
-
-	private void prepareDraw(){
-		float progress;
-		if (curFrame <= MiddleFrame) {
-			progress = curFrame * 1.0f / MiddleFrame;
-		} else {
-			progress = 2f - curFrame * 1.0f / MiddleFrame;
-		}
-
-		glUniform1f(burrProgram.getBurrParamLocation(), progress);
-
-		curFrame++;
-		if(curFrame > MaxFrame){
-			curFrame = 0;
-		}
 	}
 }

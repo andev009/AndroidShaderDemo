@@ -20,6 +20,7 @@ public class ShaderProgram {
 	protected static final String U_MVPMATRIX = "uMvpMatrix";
 	protected static final String U_FLASHPARAM = "uflashParam";
 	protected static final String U_BURRPARAM = "uBurrParam";
+	protected static final String U_ALPHA = "u_alpha";
 
 	protected static final String TexelWidthOffset = "texelWidthOffset";
 	protected static final String TexelHeightOffset = "texelHeightOffset";

@@ -21,6 +21,7 @@ import com.andev.androidshaderdemo.render.ScaleRender;
 import com.andev.androidshaderdemo.render.SharpRender;
 import com.andev.androidshaderdemo.render.SimpleRender;
 import com.andev.androidshaderdemo.render.SimpleTextureRender;
+import com.andev.androidshaderdemo.render.SoulOutRender;
 import com.andev.androidshaderdemo.render.TwoFilterRender;
 
 
@@ -84,6 +85,8 @@ public class FilterActivity extends AppCompatActivity {
 			setFlashWhiteRender();
 		}else if(type == 10){
 			setBurrRender();
+		}else if(type == 11){
+			setSoulOutRender();
 		}
 	}
 
@@ -140,6 +143,11 @@ public class FilterActivity extends AppCompatActivity {
 	private void setBurrRender(){
 		BurrRender burrRender = new BurrRender(this);
 		glSurfaceView.setRenderer(burrRender);
+	}
+
+	private void setSoulOutRender(){
+		SoulOutRender soulOutRender = new SoulOutRender(this);
+		glSurfaceView.setRenderer(soulOutRender);
 	}
 
 	@Override

@@ -92,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
 			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
 			intent.putExtra("type", 10);
 			startActivity(intent);
+		}else if ("Soul out".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+			intent.putExtra("type", 11);
+			startActivity(intent);
 		}
 
 

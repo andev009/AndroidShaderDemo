@@ -23,6 +23,7 @@ public class Section {
 		sectionList.add("Scale Animation");
 		sectionList.add("Flash White");
 		sectionList.add("Burr");
+		sectionList.add("Soul out");
 	}
 
 	List<String> getSectionList(){
