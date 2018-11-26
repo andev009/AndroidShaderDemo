@@ -87,7 +87,7 @@ public class SoulOutRender implements GLSurfaceView.Renderer{
         float alpha = 0.3f - progress * 0.3f;
 		curFrame++;
 
-		drawLayer(1,1 - alpha);
+		drawLayer(1.0f,1.0f);
 
 		drawLayer(scale, alpha);
 
