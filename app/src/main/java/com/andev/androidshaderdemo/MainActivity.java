@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
 			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
 			intent.putExtra("type", 11);
 			startActivity(intent);
+		}else if ("Shake".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+			intent.putExtra("type", 12);
+			startActivity(intent);
 		}
 
 

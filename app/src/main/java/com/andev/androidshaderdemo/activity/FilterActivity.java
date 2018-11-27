@@ -18,6 +18,7 @@ import com.andev.androidshaderdemo.render.CannyRender;
 import com.andev.androidshaderdemo.render.FlashWhiteRender;
 import com.andev.androidshaderdemo.render.MultiTextureRender;
 import com.andev.androidshaderdemo.render.ScaleRender;
+import com.andev.androidshaderdemo.render.ShakeRender;
 import com.andev.androidshaderdemo.render.SharpRender;
 import com.andev.androidshaderdemo.render.SimpleRender;
 import com.andev.androidshaderdemo.render.SimpleTextureRender;
@@ -87,6 +88,8 @@ public class FilterActivity extends AppCompatActivity {
 			setBurrRender();
 		}else if(type == 11){
 			setSoulOutRender();
+		}else if(type == 12){
+			setShakeRender();
 		}
 	}
 
@@ -148,6 +151,11 @@ public class FilterActivity extends AppCompatActivity {
 	private void setSoulOutRender(){
 		SoulOutRender soulOutRender = new SoulOutRender(this);
 		glSurfaceView.setRenderer(soulOutRender);
+	}
+
+	private void setShakeRender(){
+		ShakeRender shakeRender = new ShakeRender(this);
+		glSurfaceView.setRenderer(shakeRender);
 	}
 
 	@Override

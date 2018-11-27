@@ -24,6 +24,7 @@ public class Section {
 		sectionList.add("Flash White");
 		sectionList.add("Burr");
 		sectionList.add("Soul out");
+		sectionList.add("Shake");
 	}
 
 	List<String> getSectionList(){
