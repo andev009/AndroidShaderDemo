@@ -26,6 +26,7 @@
         <activity android:name=".activity.NativeActivity"/>
         <activity android:name=".activity.EGLActivity"/>
         <activity android:name=".activity.LUTActivity"/>
+        <activity android:name=".record.RecordActivity"/>
     </application>
 
 </manifest>

@@ -312,9 +312,9 @@ public final class EglCore {
 	/**
 	 * Sends the presentation time stamp to EGL.  Time is expressed in nanoseconds.
 	 */
-//	public void setPresentationTime(EGLSurface eglSurface, long nsecs) {
-//		EGLExt.eglPresentationTimeANDROID(mEGLDisplay, eglSurface, nsecs);
-//	}
+	public void setPresentationTime(EGLSurface eglSurface, long nsecs) {
+		EGLExt.eglPresentationTimeANDROID(mEGLDisplay, eglSurface, nsecs);
+	}
 
 	/**
 	 * Returns true if our context and the specified surface are current.
