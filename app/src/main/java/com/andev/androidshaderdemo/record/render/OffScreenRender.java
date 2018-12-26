@@ -1,9 +1,7 @@
 package com.andev.androidshaderdemo.record.render;
 
 
-import android.content.Context;
 import android.opengl.EGLContext;
-import android.util.Log;
 import android.view.Surface;
 
 import com.andev.androidshaderdemo.filter.CameraInputFilter;
@@ -16,9 +14,8 @@ public class OffScreenRender {
 	private OffSreenSurface offSreenSurface;
 
 	ImageFilter imageFilter;
-	Context context;
 
-	public OffScreenRender(	Context context, EGLContext eglContext, Surface surface) {
+	public OffScreenRender(EGLContext eglContext, Surface surface) {
 		eglCore = new EglCore(eglContext, EglCore.FLAG_RECORDABLE);
 
 		offSreenSurface = new OffSreenSurface(eglCore, surface);
@@ -46,12 +43,7 @@ public class OffScreenRender {
 //		filter.draw(textureId, matrix,0,0);
 
 		cameraInputFilter.onDrawFrame(textureId);
-
-		Log.w(TAG, "textureId :" + textureId);
-		Log.w(TAG, "draw :" + time);
-
 		offSreenSurface.setPresentationTime(time);
-
 
 		offSreenSurface.swapBuffers();
 	}

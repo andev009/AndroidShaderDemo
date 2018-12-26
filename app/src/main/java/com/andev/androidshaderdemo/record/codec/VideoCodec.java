@@ -82,7 +82,7 @@ public class VideoCodec {
 		recordHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				offScreenRender = new OffScreenRender(context, glContext, inputSurface);
+				offScreenRender = new OffScreenRender(glContext, inputSurface);
 				mediaCodec.start();
 			}
 		});

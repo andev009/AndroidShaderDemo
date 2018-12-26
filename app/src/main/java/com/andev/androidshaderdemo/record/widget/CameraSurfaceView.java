@@ -133,4 +133,5 @@ public class CameraSurfaceView extends GLSurfaceView implements OnRenderStateCal
 			onFrameAvailableCallback.onFrameAvailableCallback(frameData);
 		}
 	}
+
 }
