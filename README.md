@@ -30,7 +30,9 @@ Android平台OpenGL SE Camera滤镜实现Demo
 
 [《Android基于Shader的图像处理(12)-仿抖音抖动特效》](https://www.jianshu.com/p/b43f3dbc32a2)
 
-[《Android基于Shader的图像处理(13)-相机分屏预览1》](https://www.jianshu.com/p/bf75c84b7a79)
+[《Android基于Shader的图像处理(13)-相机分屏预览》](https://www.jianshu.com/p/bf75c84b7a79)
+
+[《Android基于Shader的图像处理(14)-仿抖音分屏预览》](https://www.jianshu.com/p/dd843de3c345)
 
 [《Android Native层 OpenGL ES开发》](https://www.jianshu.com/p/53ce56463c32)
 
