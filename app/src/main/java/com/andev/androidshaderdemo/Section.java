@@ -26,6 +26,7 @@ public class Section {
 		sectionList.add("Soul out");
 		sectionList.add("Shake");
 		sectionList.add("Split Screen 1");
+		sectionList.add("Split Screen 2");
 		sectionList.add("Record");
 	}
 

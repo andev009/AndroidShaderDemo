@@ -1,8 +1,5 @@
 package com.andev.androidshaderdemo.camera;
 
-/**
- * Created by why8222 on 2016/2/25.
- */
 public class CameraInfo {
 
     public int previewWidth;

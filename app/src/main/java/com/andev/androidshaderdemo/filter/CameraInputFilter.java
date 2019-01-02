@@ -30,6 +30,8 @@ public class CameraInputFilter {
 	private int[] mFrameBufferTextures = null;
 	private int mFrameWidth = -1;
 	private int mFrameHeight = -1;
+	private int mOutputWidth;
+	private int mOutputHeight;
 
 	public CameraInputFilter(Context context, VertexArray vertexArray){
 		this.context = context;
@@ -86,6 +88,8 @@ public class CameraInputFilter {
 
 		GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, 0);
 		GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+
+		GLES20.glViewport(0, 0, mOutputWidth, mOutputHeight);
 		return mFrameBufferTextures[0];
 	}
 
@@ -119,7 +123,7 @@ public class CameraInputFilter {
 		}
 	}
 
-	private void destroyFramebuffers() {
+	public void destroyFramebuffers() {
 		if (mFrameBufferTextures != null) {
 			GLES20.glDeleteTextures(1, mFrameBufferTextures, 0);
 			mFrameBufferTextures = null;
@@ -130,5 +134,10 @@ public class CameraInputFilter {
 		}
 		mFrameWidth = -1;
 		mFrameHeight = -1;
+	}
+
+	public void onDisplaySizeChanged(final int width, final int height) {
+		mOutputWidth = width;
+		mOutputHeight = height;
 	}
 }

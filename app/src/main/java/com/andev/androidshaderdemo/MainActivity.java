@@ -14,6 +14,7 @@ import com.andev.androidshaderdemo.activity.FilterActivity;
 import com.andev.androidshaderdemo.activity.LUTActivity;
 import com.andev.androidshaderdemo.activity.NativeActivity;
 import com.andev.androidshaderdemo.activity.SplitScreenOneActivity;
+import com.andev.androidshaderdemo.activity.SplitScreenTwoActivity;
 import com.andev.androidshaderdemo.record.RecordActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -104,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
 			startActivity(intent);
 		}else if ("Split Screen 1".equals(section)) {
 			Intent intent = new Intent(MainActivity.this, SplitScreenOneActivity.class);
+			startActivity(intent);
+		}else if ("Split Screen 2".equals(section)) {
+			Intent intent = new Intent(MainActivity.this, SplitScreenTwoActivity.class);
 			startActivity(intent);
 		}else if ("Record".equals(section)) {
 			Intent intent = new Intent(MainActivity.this, RecordActivity.class);

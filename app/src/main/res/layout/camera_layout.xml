@@ -5,8 +5,10 @@
     android:layout_height="match_parent">
 
     <com.andev.androidshaderdemo.widget.CameraView
+        android:id="@+id/cameraView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         />
 
 </FrameLayout>

@@ -5,6 +5,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
+import android.util.Log;
 import android.view.SurfaceView;
 
 import java.io.IOException;
@@ -14,6 +15,9 @@ public class CameraEngine {
     private static int cameraID = 0;
     private static SurfaceTexture surfaceTexture;
     private static SurfaceView surfaceView;
+
+    private static int Default_Width = 640;
+    private static int Default_Height = 480;
 
     public static Camera getCamera(){
         return camera;
@@ -83,7 +87,14 @@ public class CameraEngine {
             parameters.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
         }
         Size previewSize = CameraUtils.getLargePreviewSize(camera);
+
+        Log.w("setDefaultParameters", "previewSize.width:" + previewSize.width);
+        Log.w("setDefaultParameters", "previewSize.height:" + previewSize.height);
+
+
         parameters.setPreviewSize(previewSize.width, previewSize.height);
+        //parameters.setPreviewSize(Default_Width, Default_Height);
+
         Size pictureSize = CameraUtils.getLargePictureSize(camera);
         parameters.setPictureSize(pictureSize.width, pictureSize.height);
         parameters.setRotation(90);
@@ -136,6 +147,10 @@ public class CameraEngine {
         Camera.getCameraInfo(cameraID, cameraInfo);
         info.previewWidth = size.width;
         info.previewHeight = size.height;
+
+        Log.w("CameraEngine", "11getCameraInfo.width:" + size.width);
+        Log.w("CameraEngine", "11getCameraInfo.height:" + size.height);
+
         info.orientation = cameraInfo.orientation;
         info.isFront = cameraID == 1 ? true : false;
         size = getPictureSize();

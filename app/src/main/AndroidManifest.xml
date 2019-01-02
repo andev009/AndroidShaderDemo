@@ -27,6 +27,7 @@
         <activity android:name=".activity.EGLActivity"/>
         <activity android:name=".activity.LUTActivity"/>
         <activity android:name=".activity.SplitScreenOneActivity"/>
+        <activity android:name=".activity.SplitScreenTwoActivity"/>
         <activity android:name=".record.RecordActivity"/>
     </application>
 
