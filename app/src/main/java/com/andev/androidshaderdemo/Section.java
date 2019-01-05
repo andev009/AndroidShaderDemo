@@ -27,6 +27,7 @@ public class Section {
 		sectionList.add("Shake");
 		sectionList.add("Split Screen 1");
 		sectionList.add("Split Screen 2");
+		sectionList.add("Watermark");
 		sectionList.add("Record");
 	}
 

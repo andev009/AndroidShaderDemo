@@ -33,6 +33,7 @@ public class CameraInputFilter {
 	private int mOutputWidth;
 	private int mOutputHeight;
 
+
 	public CameraInputFilter(Context context, VertexArray vertexArray){
 		this.context = context;
 		this.vertexArray = vertexArray;
@@ -41,6 +42,7 @@ public class CameraInputFilter {
 
 	public void onDrawFrame(int textureId) {
 		glClear(GL_COLOR_BUFFER_BIT);
+		GLES20.glViewport(0, 0, mOutputWidth, mOutputHeight);
 
 		simpleTextureOESProgram.useProgram();
 		simpleTextureOESProgram.setUniforms(textureId, mTextureTransformMatrix);

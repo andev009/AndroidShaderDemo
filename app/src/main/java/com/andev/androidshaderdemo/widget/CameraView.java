@@ -12,6 +12,7 @@ import com.andev.androidshaderdemo.camera.CameraInfo;
 import com.andev.androidshaderdemo.data.VertexArray;
 import com.andev.androidshaderdemo.filter.BaseFilter;
 import com.andev.androidshaderdemo.filter.CameraInputFilter;
+import com.andev.androidshaderdemo.filter.WatermarkFilter;
 import com.andev.androidshaderdemo.util.Rotation;
 import com.andev.androidshaderdemo.util.TextureHelper;
 import com.andev.androidshaderdemo.util.TextureRotationUtil;
@@ -19,6 +20,8 @@ import com.andev.androidshaderdemo.util.TextureRotationUtil;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
+import static android.opengl.GLES20.glClear;
 import static android.opengl.GLES20.glClearColor;
 import static android.opengl.GLES20.glDisable;
 import static android.opengl.GLES20.glEnable;
@@ -36,8 +39,12 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 
 	private CameraInputFilter cameraInputFilter;
 	private BaseFilter filter;
+	WatermarkFilter watermarkFilter;
 
 	private OnCameraStateListener onCameraStateListener;
+
+	private boolean openWatermarkFilter = false;
+
 
 	public interface OnCameraStateListener{
 		void onPreviewSurfaceCreated();
@@ -69,7 +76,6 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 				onFilterChanged();
 			}
 		});
-
 	}
 
 	@Override
@@ -77,7 +83,7 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 		glDisable(GLES20.GL_DITHER);
 		glClearColor(0,0, 0, 0);
 		glEnable(GLES20.GL_CULL_FACE);
-		glEnable(GLES20.GL_DEPTH_TEST);
+		//glEnable(GLES20.GL_DEPTH_TEST);
 
 		initSurfaceTexture();
 
@@ -86,6 +92,7 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 		}
 
 		//filter = new ImageFilter(context);
+		watermarkFilter = new WatermarkFilter(context, 400, 50, "Android Shader Demo",35);
 	}
 
 	@Override
@@ -105,8 +112,10 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 
 	@Override
 	public void onDrawFrame(GL10 gl) {
-		GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+		//GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		//GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+
+		glClear(GL_COLOR_BUFFER_BIT);
 
 		if(surfaceTexture == null)
 			return;
@@ -121,6 +130,11 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 		}else{
 			int frameTextureID = cameraInputFilter.onDrawToTexture(textureId);
 			filter.onDrawFrame(frameTextureID);
+		}
+
+
+		if(openWatermarkFilter){
+			watermarkFilter.onDrawFrame();
 		}
 	}
 
@@ -209,5 +223,9 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 		}else{
 			cameraInputFilter.destroyFramebuffers();
 		}
+	}
+
+	public void openWatermark(){
+		openWatermarkFilter = true;
 	}
 }

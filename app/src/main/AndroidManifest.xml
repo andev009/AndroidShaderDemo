@@ -28,6 +28,7 @@
         <activity android:name=".activity.LUTActivity"/>
         <activity android:name=".activity.SplitScreenOneActivity"/>
         <activity android:name=".activity.SplitScreenTwoActivity"/>
+        <activity android:name=".activity.WaterMarkActivity"/>
         <activity android:name=".record.RecordActivity"/>
     </application>
 
