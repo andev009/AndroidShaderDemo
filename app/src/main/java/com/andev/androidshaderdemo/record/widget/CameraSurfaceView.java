@@ -6,6 +6,7 @@ import android.graphics.SurfaceTexture;
 import android.opengl.EGLContext;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.andev.androidshaderdemo.camera.CameraEngine;
 import com.andev.androidshaderdemo.camera.CameraInfo;
@@ -24,6 +25,7 @@ public class CameraSurfaceView extends GLSurfaceView implements OnRenderStateCal
 	private Context context;
 	private SurfaceTexture surfaceTexture;
 	private PreviewRender previewRender;
+	private VertexArray vertexArray;
 
 	protected int imageWidth, imageHeight;//图像宽高
 
@@ -80,6 +82,10 @@ public class CameraSurfaceView extends GLSurfaceView implements OnRenderStateCal
 	public void onSurfaceChangedCallback(GL10 gl, int width, int height) {
 		openCamera();
 
+		Log.d("SurfaceChangedCallback", "Thread : " + Thread.currentThread().getName());
+
+		previewRender.setCameraInputFilter(new CameraInputFilter(context, vertexArray));
+
 		if(onRenderStateCallback != null){
 			onRenderStateCallback.onSurfaceChangedCallback(gl, width, height);
 		}
@@ -122,8 +128,7 @@ public class CameraSurfaceView extends GLSurfaceView implements OnRenderStateCal
 				cube[6], cube[7], textureCords[6],textureCords[7]
 		};
 
-		VertexArray vertexArray = new VertexArray(newCube);
-		previewRender.setCameraInputFilter(new CameraInputFilter(context, vertexArray));
+		vertexArray = new VertexArray(newCube);
 	}
 
 

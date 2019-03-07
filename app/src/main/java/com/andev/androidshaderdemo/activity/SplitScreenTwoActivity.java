@@ -30,4 +30,11 @@ public class SplitScreenTwoActivity extends Activity implements CameraView.OnCam
 		cameraView.setFilter(new SplitScreenFilter(this));
 	}
 
+
+	@Override
+	public void onStop() {
+		super.onStop();
+
+		cameraView.stopPreview();
+	}
 }

@@ -103,7 +103,16 @@ public class SplitScreenOneActivity extends AppCompatActivity implements OnRende
 		super.onStop();
 
 		cameraSurfaceView.stopPreview();
-		offScreenRender.release();
+
+		previewHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				if(offScreenRender != null){
+					offScreenRender.release();
+				}
+			}
+		});
+
 	}
 
 }

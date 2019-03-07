@@ -6,6 +6,7 @@ import android.graphics.SurfaceTexture;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.andev.androidshaderdemo.camera.CameraEngine;
 import com.andev.androidshaderdemo.camera.CameraInfo;
@@ -66,6 +67,9 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 		setEGLContextClientVersion(2);
 		setRenderer(this);
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+
+		Log.d("CameraView", "CameraView Thread.currentThread() :" + Thread.currentThread().getName());
+
 	}
 
 	public void setFilter(final BaseFilter imageFilter){
@@ -84,6 +88,8 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 		glClearColor(0,0, 0, 0);
 		glEnable(GLES20.GL_CULL_FACE);
 		//glEnable(GLES20.GL_DEPTH_TEST);
+
+		Log.d("CameraView", "CameraView Thread.currentThread() :" + Thread.currentThread().getName());
 
 		initSurfaceTexture();
 
@@ -209,6 +215,7 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 //				cube[6], cube[7], textureCords[6],textureCords[7]
 //		};
 
+
 		vertexArray = new VertexArray(newCube);
 	}
 
@@ -227,5 +234,9 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 
 	public void openWatermark(){
 		openWatermarkFilter = true;
+	}
+
+	public void stopPreview(){
+		CameraEngine.releaseCamera();
 	}
 }

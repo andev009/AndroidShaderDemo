@@ -29,4 +29,11 @@ public class WaterMarkActivity extends Activity implements CameraView.OnCameraSt
 	public void onPreviewSurfaceCreated() {
 		cameraView.openWatermark();
 	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+
+		cameraView.stopPreview();
+	}
 }
