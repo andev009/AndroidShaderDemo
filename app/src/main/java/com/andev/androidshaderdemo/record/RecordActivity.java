@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.andev.androidshaderdemo.R;
+import com.andev.androidshaderdemo.camera.CameraEngine;
+import com.andev.androidshaderdemo.camera.CameraInfo;
 import com.andev.androidshaderdemo.record.codec.VideoCodec;
 import com.andev.androidshaderdemo.record.codec.VideoConfig;
 import com.andev.androidshaderdemo.record.render.OnFrameAvailableCallback;
@@ -67,8 +69,11 @@ public class RecordActivity extends Activity implements OnRenderStateCallback, O
 	private void startRecord(){
 		isRecord = true;
 
+		CameraInfo info = CameraEngine.getCameraInfo();
+
+
 		//VideoConfig videoConfig = new VideoConfig(VIDEO_TEMP_FILE_NAME, eglContext, 640, 480, BIT_RATE);
-		VideoConfig videoConfig = new VideoConfig(VIDEO_TEMP_FILE_NAME, eglContext, 960, 720, BIT_RATE);
+		VideoConfig videoConfig = new VideoConfig(VIDEO_TEMP_FILE_NAME, eglContext, info.previewWidth, info.previewHeight, BIT_RATE);
 
 
 		Log.d("tag", "VIDEO_TEMP_FILE_NAME : " + VIDEO_TEMP_FILE_NAME);
@@ -101,8 +106,6 @@ public class RecordActivity extends Activity implements OnRenderStateCallback, O
 
 	@Override
 	public void onFrameAvailableCallback(VideoFrameData frameData) {
-		//Log.w("RecordActivity", "onFrameAvailableCallback:" + Thread.currentThread().getName());
-
 		videoCodec.frameAvailableCallback(frameData);
 	}
 

@@ -42,7 +42,6 @@ public class CameraInputFilter {
 
 	public void onDrawFrame(int textureId) {
 		glClear(GL_COLOR_BUFFER_BIT);
-		//GLES20.glViewport(0, 0, mOutputWidth, mOutputHeight);
 
 		simpleTextureOESProgram.useProgram();
 		simpleTextureOESProgram.setUniforms(textureId, mTextureTransformMatrix);

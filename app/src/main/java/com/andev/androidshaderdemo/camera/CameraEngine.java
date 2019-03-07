@@ -148,8 +148,8 @@ public class CameraEngine {
         info.previewWidth = size.width;
         info.previewHeight = size.height;
 
-        Log.w("CameraEngine", "11getCameraInfo.width:" + size.width);
-        Log.w("CameraEngine", "11getCameraInfo.height:" + size.height);
+        Log.w("CameraEngine", "getCameraInfo.width:" + size.width);
+        Log.w("CameraEngine", "getCameraInfo.height:" + size.height);
 
         info.orientation = cameraInfo.orientation;
         info.isFront = cameraID == 1 ? true : false;
