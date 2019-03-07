@@ -66,8 +66,6 @@ public class VideoCodec {
 		inputSurface = mediaCodec.createInputSurface();
 		glContext = videoConfig.getGLContext();
 
-		Log.w(TAG, VIDEO_FILE);
-
 		mediaMuxer = new MediaMuxer(VIDEO_FILE,
 				MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
 	}
@@ -89,6 +87,9 @@ public class VideoCodec {
 	}
 
 	public void stop(){
+		if(recordHandler == null){
+			return;
+		}
 		recordHandler.post(new Runnable() {
 			@Override
 			public void run() {
@@ -109,17 +110,24 @@ public class VideoCodec {
 				videoConfig = null;
 				recordHandler.getLooper().quitSafely();
 				recordHandler = null;
+
+				Log.w("VideoCodec", "stop:" + Thread.currentThread().getName());
+
 			}
 		});
 	}
 
 	public void frameAvailableCallback(final VideoFrameData frameData) {
+		if(recordHandler == null){
+			return;
+		}
+
 		recordHandler.post(new Runnable() {
 			@Override
 			public void run() {
-//				if(offScreenRender == null){
-//					return;
-//				}
+				if(offScreenRender == null){
+					return;
+				}
 
 				Log.w("VideoCodec", "frameAvailableCallback:" + Thread.currentThread().getName());
 

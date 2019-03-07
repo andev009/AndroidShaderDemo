@@ -5,6 +5,7 @@ import android.graphics.SurfaceTexture;
 import android.opengl.EGL14;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.util.Log;
 
 import com.andev.androidshaderdemo.filter.CameraInputFilter;
 import com.andev.androidshaderdemo.record.filter.ImageFilter;
@@ -61,13 +62,15 @@ public class PreviewRender implements GLSurfaceView.Renderer{
 		GLES20.glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
 		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
-		//Log.d("onDrawFrame", "Thread : " + Thread.currentThread().getName());
+		Log.d("onDrawFrame", "Thread : " + Thread.currentThread().getName());
 
 		if(surfaceTexture == null)
 			return;
 		surfaceTexture.updateTexImage();
 		float[] mtx = new float[16];
 		surfaceTexture.getTransformMatrix(mtx);
+
+
 
 		if(onFrameAvailableCallback != null){
 			onFrameAvailableCallback.onFrameAvailableCallback(new VideoFrameData(cameraInputFilter,
@@ -82,6 +85,7 @@ public class PreviewRender implements GLSurfaceView.Renderer{
 			cameraInputFilter.setTextureTransformMatrix(mtx);
 			cameraInputFilter.onDrawFrame(textureId);
 		}
+
 	}
 
 	private void initSurfaceTexture(){

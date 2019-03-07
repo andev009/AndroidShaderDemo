@@ -131,6 +131,8 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer{
 
 		cameraInputFilter.setTextureTransformMatrix(mtx);
 
+		//set viewport for surfaceView
+		glViewport(0, 0, surfaceWidth, surfaceHeight);
 		if(filter == null){
 			cameraInputFilter.onDrawFrame(textureId);
 		}else{

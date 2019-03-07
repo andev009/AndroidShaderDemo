@@ -34,6 +34,8 @@ public class RecordActivity extends Activity implements OnRenderStateCallback, O
 	VideoCodec videoCodec;
 	EGLContext eglContext;
 
+	boolean isRecord;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,15 +52,27 @@ public class RecordActivity extends Activity implements OnRenderStateCallback, O
 		bt_record.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startRecord();
+				if(!isRecord){
+					startRecord();
 
-				bt_record.setText("Stop");
+					bt_record.setText("Stop");
+				}else{
+					stopRecord();
+					bt_record.setText("Start");
+				}
 			}
 		});
 	}
 
 	private void startRecord(){
-		VideoConfig videoConfig = new VideoConfig(VIDEO_TEMP_FILE_NAME, eglContext, 640, 480, BIT_RATE);
+		isRecord = true;
+
+		//VideoConfig videoConfig = new VideoConfig(VIDEO_TEMP_FILE_NAME, eglContext, 640, 480, BIT_RATE);
+		VideoConfig videoConfig = new VideoConfig(VIDEO_TEMP_FILE_NAME, eglContext, 960, 720, BIT_RATE);
+
+
+		Log.d("tag", "VIDEO_TEMP_FILE_NAME : " + VIDEO_TEMP_FILE_NAME);
+
 		videoCodec = new VideoCodec(this, videoConfig);
 		try {
 			videoCodec.prepareCodec();
@@ -71,6 +85,7 @@ public class RecordActivity extends Activity implements OnRenderStateCallback, O
 	}
 
 	private void stopRecord(){
+		isRecord = false;
 		videoCodec.stop();
 	}
 
@@ -86,7 +101,7 @@ public class RecordActivity extends Activity implements OnRenderStateCallback, O
 
 	@Override
 	public void onFrameAvailableCallback(VideoFrameData frameData) {
-		Log.w("RecordActivity", "onFrameAvailableCallback:" + Thread.currentThread().getName());
+		//Log.w("RecordActivity", "onFrameAvailableCallback:" + Thread.currentThread().getName());
 
 		videoCodec.frameAvailableCallback(frameData);
 	}

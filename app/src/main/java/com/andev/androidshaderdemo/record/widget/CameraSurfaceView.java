@@ -6,7 +6,6 @@ import android.graphics.SurfaceTexture;
 import android.opengl.EGLContext;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.andev.androidshaderdemo.camera.CameraEngine;
 import com.andev.androidshaderdemo.camera.CameraInfo;
@@ -81,8 +80,6 @@ public class CameraSurfaceView extends GLSurfaceView implements OnRenderStateCal
 	@Override
 	public void onSurfaceChangedCallback(GL10 gl, int width, int height) {
 		openCamera();
-
-		Log.d("SurfaceChangedCallback", "Thread : " + Thread.currentThread().getName());
 
 		previewRender.setCameraInputFilter(new CameraInputFilter(context, vertexArray));
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -49,6 +50,23 @@ public class SplitScreenOneActivity extends AppCompatActivity implements OnRende
 
 		cameraSurfaceView.setOnRenderStateCallback(this);
 		cameraSurfaceView.setOnFrameAvailableCallback(this);
+
+		surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+			@Override
+			public void surfaceCreated(SurfaceHolder surfaceHolder) {
+				createOffScreenRender();
+			}
+
+			@Override
+			public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+
+			}
+
+			@Override
+			public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+				Log.d("surfaceDestroyed","surfaceDestroyed 111111");
+			}
+		});
 	}
 
 
@@ -59,12 +77,7 @@ public class SplitScreenOneActivity extends AppCompatActivity implements OnRende
 		surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
 			@Override
 			public void surfaceCreated(SurfaceHolder surfaceHolder) {
-				previewHandler.post(new Runnable() {
-					@Override
-					public void run() {
-						offScreenRender = new OffScreenRender(eglContext, surfaceView.getHolder().getSurface());
-					}
-				});
+				createOffScreenRender();
 			}
 
 			@Override
@@ -74,7 +87,7 @@ public class SplitScreenOneActivity extends AppCompatActivity implements OnRende
 
 			@Override
 			public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
+				Log.d("surfaceDestroyed","surfaceDestroyed 22222");
 			}
 		});
 	}
@@ -98,21 +111,45 @@ public class SplitScreenOneActivity extends AppCompatActivity implements OnRende
 		});
 	}
 
+	private synchronized void createOffScreenRender(){
+		previewHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				if(offScreenRender == null){
+					offScreenRender = new OffScreenRender(eglContext, surfaceView.getHolder().getSurface());
+				}
+			}
+		});
+	}
+
+
+	@Override
+	public void onPause(){
+		super.onPause();
+
+		cameraSurfaceView.onPause();
+	}
+
 	@Override
 	public void onStop(){
 		super.onStop();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 
 		cameraSurfaceView.stopPreview();
+
 
 		previewHandler.post(new Runnable() {
 			@Override
 			public void run() {
 				if(offScreenRender != null){
 					offScreenRender.release();
+					offScreenRender = null;
 				}
 			}
 		});
-
 	}
-
 }
